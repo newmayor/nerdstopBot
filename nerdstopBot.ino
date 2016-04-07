@@ -1,3 +1,15 @@
+/*
+Nerdstop Robotics Workshop
+Built by: Numair Ahmed - April 2016
+
+VERSION CONTROL:
+4/5/2016 - Initial code outline with new motor driver header file
+4/6/2016 - Include ultrasonic sensor implementation
+4/7/2016 - Changed motor frequency to syn with sensor data feed freqeuncy
+
+
+*/
+
 #include <AFMotor.h>
 
 
@@ -31,7 +43,7 @@ void loop() {
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2) / 29.1;
   if (distance < 40) {  // This is where the LED On/Off happens
-     motor1.setSpeed(100);
+     motor1.setSpeed(50);
      motor2.setSpeed(100);
       //"distance < 40" = object is too close
       Serial.println("Object detected within 40 centimeters if robot\n");
@@ -47,8 +59,8 @@ void loop() {
 }
   else {
     Serial.println("Speed up and begin moving forward");
-      motor1.run(200);
-      motor2.run(200);
+      motor1.run(100);
+      motor2.run(100);
 
       motor1.run(FORWARD);
       motor2.run(BACKWARD);
@@ -56,8 +68,8 @@ void loop() {
    // digitalWrite(led2,HIGH);
   }
   if (distance >= 200 || distance <= 0){
-    motor1.setSpeed(200);
-      motor2.setSpeed(200);
+    motor1.setSpeed(100);
+      motor2.setSpeed(100);
       Serial.print("Out of Range");
       motor1.run(BACKWARD);
       motor2.run(FORWARD);
